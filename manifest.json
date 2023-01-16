@@ -1,0 +1,18 @@
+{
+  "id": "dev.kingfish.CopyRaw",
+  "name": "Copy Raw",
+  "description": "Copies the raw contents of a message",
+  "author": {
+    "name": "King Fish",
+    "discordID": "499400512559382538",
+    "github": "12944qwerty"
+  },
+  "version": "1.0.0",
+  "updater": {
+    "type": "github",
+    "id": "qwerty-mods/copy-raw"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.ts"
+}
