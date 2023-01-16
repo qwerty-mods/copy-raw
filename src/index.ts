@@ -1,7 +1,8 @@
-import { /*Logger,*/ api, types, webpack } from "replugged";
+import { /*Logger,*/ api, common, types, webpack } from "replugged";
 import { Channel, Message } from "discord-types/general";
 
 import { Icon } from "./CopyIcon";
+import createModal from "./Modal";
 
 // const logger = Logger.plugin("Copy Raw");
 
@@ -20,23 +21,25 @@ export async function start(): Promise<void> {
       "copy",
       mod as types.ObjectExports,
     )!,
-    SUPPORTED: webpack.getFunctionBySource((e) => {
-      console.log(e);
-      return typeof e === "boolean";
-    }, mod as types.ObjectExports) as unknown as boolean,
+    SUPPORTED: Object.values(mod).find(e => typeof e === "boolean") as unknown as boolean,
   };
 
-  api.messagePopover.addButton("copyraw", (msg: Message, channel: Channel) => {
+  const classes: Record<string, string> = await webpack.waitForModule(webpack.filters.byProps("labelRow"));
+
+  api.messagePopover.addButton("copyraw", (msg: Message, _: Channel) => {
     return {
-      key: "copyraw",
-      label: "Copy Raw",
+      label: "View Raw(L) Copy Raw(R)",
       icon: Icon,
-      message: msg,
-      channel,
-      onClick: () => console.log("omg"),
+      onClick: () => {
+        createModal(msg, Clipboard, classes);
+      },
       onContextMenu: () => {
-        console.log(msg, Clipboard);
-        Clipboard.copy(msg.content);
+        if (Clipboard.SUPPORTED) {
+          Clipboard.copy(msg.content);
+          common.toast.toast("Copied to clipboard!", common.toast.Kind.SUCCESS);
+        } else {
+          common.toast.toast("Your browser does not support copying to clipboard", common.toast.Kind.SUCCESS);
+        }
       },
     };
   });
