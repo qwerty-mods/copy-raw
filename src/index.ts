@@ -1,10 +1,11 @@
-import { /*Logger,*/ api, common, types, webpack } from "replugged";
+import { /*Logger,*/ Injector, api, common, types, webpack } from "replugged";
 import { Channel, Message } from "discord-types/general";
 
 import { Icon } from "./CopyIcon";
 import createModal from "./Modal";
 
 // const logger = Logger.plugin("Copy Raw");
+const injector = new Injector();
 
 export async function start(): Promise<void> {
   const mod = await webpack.waitForModule(
@@ -26,8 +27,9 @@ export async function start(): Promise<void> {
 
   const classes: Record<string, string> = await webpack.waitForModule(webpack.filters.byProps("labelRow"));
 
-  api.messagePopover.addButton("copyraw", (msg: Message, _: Channel) => {
+  injector.utils.addPopoverButton((msg: Message, _: Channel) => {
     return {
+      key: "copyraw",
       label: "View Raw(L) Copy Raw(R)",
       icon: Icon,
       onClick: () => {
@@ -46,5 +48,5 @@ export async function start(): Promise<void> {
 }
 
 export function stop(): void {
-  api.messagePopover.removeButton("copyraw");
+  injector.uninjectAll();
 }

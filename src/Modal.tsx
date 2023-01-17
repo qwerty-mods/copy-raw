@@ -52,7 +52,7 @@ export default function(msg: Message, Clipboard: ClipboardType, classes: Record<
             <>
               <Text.Eyebrow style={{marginBottom: 5}}>Content</Text.Eyebrow>
               <div style={{ userSelect: "text" }}>
-                {common.parser.defaultRules.codeBlock.react({content: msg.content, lang:""}, null, {})}
+                {common.parser.defaultRules.codeBlock.react({content: msg.content, lang: ""}, null, {})}
               </div>
               <Divider className={classes.dividerDefault} style={{marginBottom: 10}} />
             </>
@@ -60,7 +60,7 @@ export default function(msg: Message, Clipboard: ClipboardType, classes: Record<
 
           <Text.Eyebrow style={{marginBottom: 5}}>Message Data</Text.Eyebrow>
           <div style={{ userSelect: "text" }}>
-            {common.parser.defaultRules.codeBlock.react({content: msgJson, lang:"json"}, null, {})}
+            {common.parser.defaultRules.codeBlock.react({content: msgJson, lang: "json "}, null, {})}
           </div>
         </div>
       </ModalContent >
