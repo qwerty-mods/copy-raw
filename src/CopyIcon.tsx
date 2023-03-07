@@ -1,4 +1,6 @@
-export function Icon(): Element {
+import { ReactElement } from "react";
+
+export function Icon(): ReactElement {
   return (
     <svg
       viewBox="0 0 512.002 512.002"
