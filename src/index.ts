@@ -4,7 +4,7 @@ import { Channel, Message } from "discord-types/general";
 import { Icon } from "./CopyIcon";
 import createModal from "./Modal";
 
-const logger = Logger.plugin("Copy Raw");
+const _ = Logger.plugin("Copy Raw");
 const injector = new Injector();
 
 export async function start(): Promise<void> {
@@ -18,11 +18,13 @@ export async function start(): Promise<void> {
     SUPPORTED: boolean;
     copy: (content: string) => unknown;
   } = {
-    copy: Object.values(mod).find(e => typeof e === "function") as (args: string) => void,
-    SUPPORTED: Object.values(mod).find(e => typeof e === "boolean") as unknown as boolean,
+    copy: Object.values(mod).find((e) => typeof e === "function") as (args: string) => void,
+    SUPPORTED: Object.values(mod).find((e) => typeof e === "boolean") as unknown as boolean,
   };
 
-  const classes: Record<string, string> = await webpack.waitForModule(webpack.filters.byProps("labelRow"));
+  const classes: Record<string, string> = await webpack.waitForModule(
+    webpack.filters.byProps("labelRow"),
+  );
 
   injector.utils.addPopoverButton((msg: Message, _: Channel) => {
     return {
@@ -37,7 +39,10 @@ export async function start(): Promise<void> {
           Clipboard.copy(msg.content);
           common.toast.toast("Copied to clipboard!", common.toast.Kind.SUCCESS);
         } else {
-          common.toast.toast("Your browser does not support copying to clipboard", common.toast.Kind.SUCCESS);
+          common.toast.toast(
+            "Your browser does not support copying to clipboard",
+            common.toast.Kind.SUCCESS,
+          );
         }
       },
     };
