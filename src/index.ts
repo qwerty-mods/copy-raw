@@ -1,10 +1,10 @@
-import { /*Logger,*/ Injector, api, common, types, webpack } from "replugged";
+import { Injector, Logger, common, webpack } from "replugged";
 import { Channel, Message } from "discord-types/general";
 
 import { Icon } from "./CopyIcon";
 import createModal from "./Modal";
 
-// const logger = Logger.plugin("Copy Raw");
+const logger = Logger.plugin("Copy Raw");
 const injector = new Injector();
 
 export async function start(): Promise<void> {
@@ -18,10 +18,7 @@ export async function start(): Promise<void> {
     SUPPORTED: boolean;
     copy: (content: string) => unknown;
   } = {
-    copy: webpack.getFunctionBySource<(content: string) => unknown>(
-      "copy",
-      mod as types.ObjectExports,
-    )!,
+    copy: Object.values(mod).find(e => typeof e === "function") as (args: string) => void,
     SUPPORTED: Object.values(mod).find(e => typeof e === "boolean") as unknown as boolean,
   };
 
