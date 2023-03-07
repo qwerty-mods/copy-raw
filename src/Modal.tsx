@@ -60,6 +60,7 @@ export default function (msg: Message, Clipboard: ClipboardType, classes: Record
               <div style={{ userSelect: "text" }}>
                 {common.parser.defaultRules.codeBlock.react(
                   { content: msg.content, lang: "" },
+                  // @ts-expect-error
                   null,
                   {},
                 )}
@@ -72,6 +73,7 @@ export default function (msg: Message, Clipboard: ClipboardType, classes: Record
           <div style={{ userSelect: "text" }}>
             {common.parser.defaultRules.codeBlock.react(
               { content: msgJson, lang: "json " },
+              // @ts-expect-error
               null,
               {},
             )}
