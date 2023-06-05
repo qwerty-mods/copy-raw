@@ -9,8 +9,8 @@
   },
   "version": "1.0.1",
   "updater": {
-    "type": "github",
-    "id": "qwerty-mods/copy-raw"
+    "type": "store",
+    "id": "dev.kingfish.CopyRaw"
   },
   "license": "MIT",
   "type": "replugged-plugin",
