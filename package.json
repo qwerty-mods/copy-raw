@@ -1,6 +1,6 @@
 {
   "name": "copy-raw",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Copy the raw contents of a message",
   "engines": {
     "node": ">=18.0.0",
